@@ -1,0 +1,122 @@
+###############################################################################
+#                                                                             #
+# Copyright 2012 Anna Friedlander and Monica Gruber.                          #
+# (anna.fr@gmail.com and monica.gruber@vuw.ac.nz)                             #
+#                                                                             #     
+# This program is free software; you can redistribute it and/or modify it     #
+# under the same terms as Perl itself (either: the GNU General Public License #
+# as published by the Free Software Foundation; or the Artistic License).     #
+# See http://dev.perl.org/licenses/ for more information.                     #
+#                                                                             #
+# Comments and queries are welcome to either or both authors, however we are  #
+# unable to provide dedicated technical support.                              #
+#                                                                             #
+# Please acknowledge the authors if you use the programme in any work         #
+# resulting in publication. Please cite it as:                                #
+#                                                                             #
+#   Friedlander, A.M. and Gruber, M.A.M 2012. blast2taxon.pl v 1.0.           #
+#   available from anna.fr@gmail.com or monica.gruber@vuw.ac.nz               #
+#                                                                             #
+###############################################################################
+
+
+---------------------PROGRAM DESCRIPTION---------------------------------------
+
+blast2taxon.pl is a program to parse BLAST+ output (output format 6 with 
+default fields) and append taxonomic information. 
+
+It contains functions to: 
+    * summarise BLAST+ output by taxon and calculate summary statistics 
+      (number of hits; total, average, and median sequence length; average
+      e-value; average bit-score);
+    * compare BLAST+ output files by number of hits and sequence length at
+      a particular taxon level (or taxon level and GI)
+    * create FASTA files and split data based on whether an input sequence
+      hit a particular taxon.
+
+More detailed information can be found in the help menu by using the command:
+
+      % perl blast2taxon.pl -help
+
+
+---------------------RUNNING REQUIREMENTS--------------------------------------
+
+blast2taxon.pl parses files of the following format:
+
+    BLAST+ output in output format 6 (tab-delimited, no comment lines) with 
+    default fields (qseqid sseqid pident length mismatch gapopen qstart qend 
+    sstart send evalue bitscore)
+
+To run blast2taxon.pl, Perl 5 (or later) and the following Perl modules must be
+installed:
+
+    *Bioperl
+    *Bio::LITE::Taxonomy::NCBI::Gi2taxid
+    *Sort::Naturally
+
+As well as the default modules Getopt::Long and List::Util
+
+The appropriate (nucl or prot) NCBI Taxonomy flatfiles are required:
+
+    *nodes.dmp
+    *names.dmp
+    *gi_taxid_nucl.dmp or gi_taxid_prot.dmp
+
+which can be obtained from ftp://ftp.ncbi.nih.gov/pub/taxonomy (the first two 
+files will be in a taxdump archive)
+
+NOTE: the first time the program is run, use the gi_taxid_<nucl/prot>.dmp file;
+      a gi_taxid_<nucl/prot>.bin file will be created, which can be used 
+      subsequently
+
+To use -taxon_summary, input files to the BLAST+ search (in FASTA format) are
+required.
+
+
+---------------------FUNCTION SUMMARY------------------------------------------
+
+The following functions are available to the user:
+
+taxon_info
+fetches taxid and taxonomic hierarchy given GI, appends to BLAST+ output and 
+prints to file (output used in the other four main functions)
+
+taxon_summary
+sorts taxon_info output according to taxon specified by the user, calculates 
+summary stats (number of hits; total, average, median sequence length; average 
+e-value; average bit-score) and prints to file
+
+taxon_overlap
+sorts taxon_info output according to taxon specified by user compares n files 
+by number of hits and total length of hits for each taxon
+
+taxon_sequence_overlap
+sorts taxon_info output according to taxon specified by user compares n files
+by number of hits and total length of hits for each taxon+GI
+using -nonunique prints only records found in >1 file
+
+sequence_extract
+given taxon_info output and the original input files to BLAST (which were used
+to create the BLAST output used as input to taxon_info), and a taxon level and
+taxon name (e.g. -level superkingdom -name bacteria) this function creates two
+fasta files. One file contains all sequences that hit the taxon name specified,
+the other contains all sequences that hit other taxa. Note that there will 
+likely be overlap in the output files (eg an input sequence may hit both 
+bacterial sequences and nonbacterial sequences).
+Using the subseq option prints out only the sequence that was matched (using 
+qstart and qend)
+
+
+---------------------SUGGESTED IMPROVEMENTS------------------------------------
+
+The following are improvements that the user may wish to make to the program:
+
+    *allow input of any BLAST output type, by requiring the user to specify 
+     what column the qseqid, sseqid, evalue etc are in and how fields are 
+     delimited (at the moment BLAST+ output format 6 with default fields is 
+     hardcoded in).
+    *graphical output
+    *improve efficiency (e.g. use three hashes in taxon_info (line->gi; 
+     gi->taxid; taxid->taxon_info) - at present there is duplication in this
+     function
+    *utilise parallel processing (at present processing is sequential)
