@@ -14,7 +14,7 @@
 # Please acknowledge the authors if you use the programme in any work         #
 # resulting in publication. Please cite it as:                                #
 #                                                                             #
-#   Friedlander, A.M. and Gruber, M.A.M 2012. blast2taxon.pl v 1.0.           #
+#   Friedlander, A.M. and Gruber, M.A.M 2012. taxon4blast.pl v 1.0.           #
 #   available from anna.fr@gmail.com or monica.gruber@vuw.ac.nz               #
 #                                                                             #
 ###############################################################################
@@ -22,7 +22,7 @@
 
 ---------------------PROGRAM DESCRIPTION---------------------------------------
 
-blast2taxon.pl is a program to parse BLAST+ output (output format 6 with 
+taxon4blast.pl is a program to parse BLAST+ output (output format 6 with 
 default fields) and append taxonomic information. 
 
 It contains functions to: 
@@ -36,18 +36,18 @@ It contains functions to:
 
 More detailed information can be found in the help menu by using the command:
 
-      % perl blast2taxon.pl -help
+      % perl taxon4blast.pl -help
 
 
 ---------------------RUNNING REQUIREMENTS--------------------------------------
 
-blast2taxon.pl parses files of the following format:
+taxon4blast.pl parses files of the following format:
 
     BLAST+ output in output format 6 (tab-delimited, no comment lines) with 
     default fields (qseqid sseqid pident length mismatch gapopen qstart qend 
     sstart send evalue bitscore)
 
-To run blast2taxon.pl, Perl 5 (or later) and the following Perl modules must be
+To run taxon4blast.pl, Perl 5 (or later) and the following Perl modules must be
 installed:
 
     *Bioperl
