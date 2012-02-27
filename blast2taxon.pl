@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-#blast2taxon.pl
+#taxon4blast.pl
 
 
 ###############################################################################
@@ -19,13 +19,13 @@
 # Please acknowledge the authors if you use the programme in any work         #
 # resulting in publication. Please cite it as:                                #
 #                                                                             #
-#   Friedlander, A.M. and Gruber, M.A.M 2012. blast2taxon.pl v 1.0.           #
+#   Friedlander, A.M. and Gruber, M.A.M 2012. taxon4blast.pl v 1.0.           #
 #   available from anna.fr@gmail.com or monica.gruber@vuw.ac.nz               #
 #                                                                             #
 ###############################################################################
 
 
-# blast2taxon.pl is a program to parse BLAST+ output (output format 6 with 
+# taxon4blast.pl is a program to parse BLAST+ output (output format 6 with 
 # default fields) and append taxonomic information. 
 #
 # It contains functions to: 
@@ -39,7 +39,7 @@
 #
 # More detailed information can be found in the help menu by using the command:
 #
-#      % perl blast2taxon.pl -help
+#      % perl taxon4blast.pl -help
 
 use strict;
 use warnings; #comment out to suppress warnings
@@ -493,7 +493,7 @@ if($help){
     print <<HELP;
 
     USAGE
-         perl blast2taxon.pl [-taxon_info filename(s)]
+         perl taxon4blast.pl [-taxon_info filename(s)]
                              [-nodesfile filename]
                              [-namesfile filename]
                              [-dictfile filename]
