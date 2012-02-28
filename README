@@ -103,7 +103,7 @@ fasta files. One file contains all sequences that hit the taxon name specified,
 the other contains all sequences that hit other taxa. Note that there will 
 likely be overlap in the output files (eg an input sequence may hit both 
 bacterial sequences and nonbacterial sequences).
-Using the subseq option prints out only the sequence that was matched (using 
+Using the -subseq option prints out only the sequence that was matched (using 
 qstart and qend)
 
 
