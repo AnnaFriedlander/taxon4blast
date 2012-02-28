@@ -69,7 +69,7 @@ NOTE: the first time the program is run, use the gi_taxid_<nucl/prot>.dmp file;
       a gi_taxid_<nucl/prot>.bin file will be created, which can be used 
       subsequently
 
-To use -taxon_summary, input files to the BLAST+ search (in FASTA format) are
+To use -sequence_extract, input files to the BLAST+ search (in FASTA format) are
 required.
 
 
